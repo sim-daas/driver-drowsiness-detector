@@ -7,6 +7,14 @@ Here's how you can create a basic Conda environment and install libraries using 
 ### 1. **Install Conda** (if not already installed)
 Make sure you have Conda installed (either through [Miniconda](https://docs.conda.io/en/latest/miniconda.html) or [Anaconda](https://www.anaconda.com/)).
 
+```bash
+mkdir -p ~/miniconda3
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+rm -rf ~/miniconda3/miniconda.sh
+~/miniconda3/bin/conda init zsh
+```
+
 ### 2. **Create a Conda Environment**
 
 Use the following command to create a new Conda environment:
