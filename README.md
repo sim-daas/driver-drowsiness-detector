@@ -38,7 +38,7 @@ conda activate myenv
 To install packages using `pip` in your Conda environment, make sure the environment is activated, and then use the following command:
 
 ```bash
-pip install requests matplotlib
+pip install -r requirements.txt
 ```
 
 ### 5. **Check Installed Packages**
