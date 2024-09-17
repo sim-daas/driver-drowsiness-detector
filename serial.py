@@ -1,7 +1,7 @@
 import serial
 
 # Configure the serial port
-ser = serial.Serial('/dev/ttyACM0', 9600)  # Adjust 'COM3' to your port, and 9600 is the baud rate
+ser = serial.Serial('/dev/ttyACM0', 9600) # Adjust 'COM3' to your port, and 9600 is the baud rate
 
 def send_byte(value):
     if value == 0:
