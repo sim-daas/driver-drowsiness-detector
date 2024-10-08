@@ -13,7 +13,7 @@ transform = transforms.Compose([
 ])
 
 # Step 2: Load the dataset (you need a directory with 'open' and 'closed' subfolders)
-train_data = datasets.ImageFolder(root='detected_eyes/', transform=transform)
+train_data = datasets.ImageFolder(root='eyes/', transform=transform)
 train_loader = DataLoader(train_data, batch_size=32, shuffle=True)
 
 # Step 3: Load pre-trained ResNet-18
@@ -23,9 +23,10 @@ model = models.resnet18(pretrained=True)
 num_ftrs = model.fc.in_features
 model.fc = nn.Linear(num_ftrs, 2)
 
-for param in resnet50.parameters():
+'''
+for param in model.parameters():
     param.requires_grad = False
-
+'''
 # Step 5: Define loss function and optimizer
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
