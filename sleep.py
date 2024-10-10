@@ -93,7 +93,7 @@ import time
 from ultralytics import YOLO
 
 # Load the YOLOv11 model (Replace 'model.pt' with your model's file)
-model = YOLO("best.pt")
+model = YOLO("better.pt")
 
 # Initialize the webcam
 cap = cv2.VideoCapture(0)  # Use 0 for the default camera
@@ -105,7 +105,7 @@ if not cap.isOpened():
 # Variables to track sleep state
 sleep_detected = False
 sleep_start_time = None
-sleep_duration_threshold = 3
+sleep_duration_threshold = 5
 sleep_alert_printed = False  # To ensure "Sleep" is printed only once
 
 # Function to check and track sleep state
