@@ -34,6 +34,10 @@ def classify_eye(eye_img):
 
 # Step 5: Capture video from camera
 cap = cv2.VideoCapture(0)  # 0 is the default camera
+frame_width = 1280  # Desired width
+frame_height = 720  # Desired height
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, frame_width)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, frame_height)
 
 while True:
     ret, frame = cap.read()
@@ -58,7 +62,7 @@ while True:
             right_eye = landmarks[i][1]  # (x, y) for right eye
 
             # Define the bounding box around each eye
-            eye_margin = 20  # Margin around the eye for the bounding box
+            eye_margin = 10  # Margin around the eye for the bounding box
             left_eye_box = [
                 max(0, int(left_eye[0] - eye_margin)),
                 max(0, int(left_eye[1] - eye_margin)),

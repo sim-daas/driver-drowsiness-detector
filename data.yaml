@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['sleep']
+
+roboflow:
+  workspace: adindra-vickar-ega-odhei
+  project: eye-closed-detection-fufld
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/adindra-vickar-ega-odhei/eye-closed-detection-fufld/dataset/1

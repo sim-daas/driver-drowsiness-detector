@@ -32,7 +32,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 # Step 6: Train the model
-num_epochs = 10
+num_epochs =1
 model = model.to('cuda')  # If using GPU
 for epoch in range(num_epochs):
     running_loss = 0.0

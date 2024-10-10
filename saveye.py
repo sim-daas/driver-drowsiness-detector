@@ -9,7 +9,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 mtcnn = MTCNN(keep_all=True, device=device)  # keep_all=True to detect multiple faces
 
 # Step 4: Create a directory to save eye images
-output_dir = 'eyes/open'
+output_dir = 'eyes/closed'
 os.makedirs(output_dir, exist_ok=True)
 
 # Step 5: Function to perform face and eye detection and save eye images
@@ -35,8 +35,8 @@ def detect_faces_and_save_eyes(frame, frame_count):
         right_eye = landmark[1]  # Right eye (x, y)
 
         # Define the square size (e.g., 20x20 pixels)
-        square_size = 40
-        i = 2
+        square_size = 20
+        i = 5
         # Crop and save the left and right eye regions
         for eye_name, eye in zip(['left', 'right'], [left_eye, right_eye]):
             eye_x, eye_y = eye.astype(int)
@@ -56,6 +56,10 @@ def detect_faces_and_save_eyes(frame, frame_count):
 def process_video(input_source=0):  # 0 for webcam, or provide a video file path
     # Capture video from webcam or file
     cap = cv2.VideoCapture(input_source)
+    frame_width = 1280  # Desired width
+    frame_height = 720  # Desired height
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH, frame_width)
+    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, frame_height)
 
     frame_count = 0  # To keep track of frames
 
