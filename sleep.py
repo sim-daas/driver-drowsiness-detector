@@ -110,7 +110,7 @@ import serial
 
 # Load the YOLOv11 model (Replace 'model.pt' with your model's file)
 model = YOLO("better.pt")
-arduino = serial.Serial('/dev/ttyACM0', 9600)  # Change to the correct p>
+arduino = serial.Serial('/dev/ttyACM0', 9600)  # Change to the correct port
 
 # Initialize the webcam
 cap = cv2.VideoCapture(0)  # Use 0 for the default camera
