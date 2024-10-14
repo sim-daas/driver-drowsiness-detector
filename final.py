@@ -4,7 +4,7 @@ import serial  # For serial communication with Arduino
 from ultralytics import YOLO
 
 # Initialize serial communication (adjust 'COM3' or '/dev/ttyUSB0' to your Arduino's port)
-arduino = serial.Serial('COM3', 9600)  # Change to the correct port
+arduino = serial.Serial('/dev/ttyACM0', 9600)  # Change to the correct port
 
 # Load the YOLOv11 model (Replace 'model.pt' with your model's file)
 model = YOLO("better.pt")
@@ -45,7 +45,7 @@ def check_sleep_state(results):
                         if sleep_duration >= sleep_duration_threshold and not sleep_alert_sent:
                             print(f"Sleep detected for more than {sleep_duration_threshold} seconds!")
                             arduino.write(b'1')  # Send signal '1' to Arduino
-                            sleep_alert_sent = True  # Mark the alert as sent to avoid repetition
+#                            sleep_alert_sent = True  # Mark the alert as sent to avoid repetition
                 else:
                     # Reset if a non-sleep class is detected
                     sleep_detected = False

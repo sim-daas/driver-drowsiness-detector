@@ -7,7 +7,7 @@ def send_byte(value):
     if value == 0:
         ser.write(b'\x00')  # Send byte 0
     elif value == 1:
-        ser.write(b'\x01')  # Send byte 1
+        ser.write(b'1')  # Send byte 1
     else:
         print("Invalid input, only 0 or 1 allowed.")
 

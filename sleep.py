@@ -1,11 +1,10 @@
 '''
 import cv2
-import torch
 import time
 from ultralytics import YOLO
 
-# Load the YOLOv11 model (Replace 'model.pt' with your model's file)
-model = YOLO("best.pt")
+# Load the YOLOv11 model (Replace 'better.pt' with your model's file)
+model = YOLO("better.pt")
 
 # Initialize the webcam
 cap = cv2.VideoCapture(0)  # Use 0 for the default camera
@@ -17,40 +16,53 @@ if not cap.isOpened():
 # Variables to track sleep state
 sleep_detected = False
 sleep_start_time = None
-sleep_duration_threshold = 20
-z = 0
+sleep_duration_threshold = 5  # Time (in seconds) to detect prolonged sleep
+sleep_alert_printed = False  # To ensure "Sleep" is printed only once
+
+# Set confidence threshold
+confidence_threshold = 0.6  # Adjust based on your requirement
+
 # Function to check and track sleep state
 def check_sleep_state(results):
-    global sleep_detected, sleep_start_time, z
-    
-    # Iterate over results to check for "sleep" class (assuming it's class 1, adjust as per your model)
+    global sleep_detected, sleep_start_time, sleep_alert_printed
+
+    # Iterate over results to check for "sleep" class (assuming it's class 0)
     for result in results:
         boxes = result.boxes
-        
+
         if boxes is not None:
             for i, box in enumerate(boxes.xyxy):
                 cls = int(boxes.cls[i])  # Get class label
-                
-                # Assuming class 1 is "sleep" (adjust this based on your model's class labels)
-                if cls == 0:  # 1 corresponds to "sleep" in this example
+                conf = float(boxes.conf[i].item())
+#                print(conf)
+                # Check if the detection is "closed eyes/sleep" (class 0) and the confidence is above the threshold
+                if cls == 0 and conf >= confidence_threshold:
                     if not sleep_detected:
                         sleep_detected = True
                         sleep_start_time = time.time()  # Record the time when sleep is first detected
                     else:
                         # Calculate how long sleep has been detected
                         sleep_duration = time.time() - sleep_start_time
-                        if sleep_duration >= sleep_duration_threshold:
-                            print("Sleep detected for more than 4 seconds!", z)
-                            z += 1
+                        if sleep_duration >= sleep_duration_threshold and not sleep_alert_printed:
+                            print(f"Sleep detected for more than {sleep_duration_threshold} seconds!")
+#                            sleep_alert_printed = True  # Mark the alert as printed to avoid repetition
+
+                # If a non-sleep class is detected or confidence is below threshold, reset the state
                 else:
-                    # Reset if the "sleep" class is not detected
                     sleep_detected = False
                     sleep_start_time = None
+                    sleep_alert_printed = False
+
+        else:
+            sleep_detected = False
+            sleep_start_time = None
+            sleep_alert_printed = False
+
 
 # Start capturing and detecting
 while True:
     ret, frame = cap.read()
-    
+
     if not ret:
         print("Error: Failed to capture image.")
         break
@@ -71,9 +83,10 @@ while True:
                 cls = int(boxes.cls[i])  # Class label
 
                 # Draw the bounding box and label on the frame
-                cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
-                label = f'Class {cls}, Conf: {conf:.2f}'
-                cv2.putText(frame, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
+                if conf >= confidence_threshold:  # Only display results above confidence threshold
+                    cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
+                    label = f'Class {cls}, Conf: {conf:.2f}'
+                    cv2.putText(frame, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
 
     # Display the frame
     cv2.imshow('YOLO Inference with Sleep Detection', frame)
@@ -85,15 +98,19 @@ while True:
 # Release the capture and close windows
 cap.release()
 cv2.destroyAllWindows()
+
+
 '''
 
 
 import cv2
 import time
 from ultralytics import YOLO
+import serial
 
 # Load the YOLOv11 model (Replace 'model.pt' with your model's file)
 model = YOLO("better.pt")
+arduino = serial.Serial('/dev/ttyACM0', 9600)  # Change to the correct p>
 
 # Initialize the webcam
 cap = cv2.VideoCapture(0)  # Use 0 for the default camera
@@ -105,7 +122,7 @@ if not cap.isOpened():
 # Variables to track sleep state
 sleep_detected = False
 sleep_start_time = None
-sleep_duration_threshold = 5
+sleep_duration_threshold = 2
 sleep_alert_printed = False  # To ensure "Sleep" is printed only once
 
 # Function to check and track sleep state
@@ -119,9 +136,9 @@ def check_sleep_state(results):
         if boxes is not None:
             for i, box in enumerate(boxes.xyxy):
                 cls = int(boxes.cls[i])  # Get class label
-
+                conf = float(boxes.conf[i].item())
                 # Assuming class 0 is "closed eyes/sleep" (adjust based on your model's labels)
-                if cls == 0:
+                if cls == 0 and conf >= 0.6:
                     if not sleep_detected:
                         sleep_detected = True
                         sleep_start_time = time.time()  # Record the time when sleep is first detected
@@ -131,6 +148,7 @@ def check_sleep_state(results):
                         if sleep_duration >= sleep_duration_threshold and not sleep_alert_printed:
                             print(sleep_start_time, time.time(), sleep_duration)
                             print("Sleep detected for more than 2 seconds!")
+                            arduino.write(b'1')
                             sleep_detected = False
                             sleep_start_time = None
                             sleep_alert_printed = False
