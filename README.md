@@ -48,3 +48,24 @@ You can verify the installed packages using:
 ```bash
 pip list
 ```
+
+---
+
+### Slide 2: Index
+
+1. **Objective and Need**  
+2. **Proposal**  
+3. **Data Flow Diagram**  
+4. **Parts of the Solution**  
+   - Camera Input  
+   - OpenCV  
+   - PyTorch Backend YOLO Object Detector on Custom Dataset  
+   - Serial Communication  
+   - Arduino + Buzzer  
+5. **Hardware + Software Requirements**  
+6. **Dataset (Training and Testing Information)**  
+7. **Conclusion**  
+8. **References**  
+
+---
+
