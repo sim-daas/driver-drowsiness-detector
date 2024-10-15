@@ -51,7 +51,7 @@ pip list
 
 ---
 
-### Slide 2: Index
+### Index
 
 1. **Objective and Need**  
 2. **Proposal**  
@@ -69,3 +69,6 @@ pip list
 
 ---
 
+### Objective and Need
+
+Driver drowsiness is a significant factor in road accidents, contributing to approximately 20% of all crashes worldwide. According to the National Highway Traffic Safety Administration (NHTSA), drowsy driving results in an estimated 100,000 police-reported crashes annually in the United States, leading to around 800 fatalities and 44,000 injuries. The need for effective driver monitoring systems is paramount to enhance road safety and reduce accident rates. By implementing machine learning techniques for driver drowsiness detection, we can identify fatigue levels in real-time, providing timely alerts to drivers and potentially preventing life-threatening accidents on the road.
