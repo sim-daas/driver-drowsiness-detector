@@ -156,3 +156,90 @@ The output signal to the buzzer is managed through a digital pin on the Arduino,
 
 --- 
 
+### Hardware Requirements
+- **Laptop Specifications:**
+  - **GPU:** NVIDIA RTX with a minimum of 4 GB VRAM
+  - **RAM:** Minimum 8 GB
+  - **Processor:** Intel i5 or higher (10th generation or newer)
+  - **Operating System:** Linux or Windows (for using virtual environments with Python)
+
+- **Microcontroller:**
+  - **Arduino Uno**
+
+- **Components:**
+  - **Buzzer**
+  - **Jumper Wires**
+  - **Breadboard**
+
+---
+
+### Software Requirements
+- **Programming Languages:**
+  - Python
+
+- **Package Managers:**
+  - Conda
+
+- **Libraries and Frameworks:**
+  - OpenCV
+  - PyTorch
+  - PySerial
+
+- **Development Environment:**
+  - Arduino IDE
+
+- **Additional Tools:**
+  - Git for version control
+  - Jupyter Notebook for interactive development and testing
+
+--- 
+
+### Dataset
+
+- **Dataset Source:** [Eye Closed Detection Dataset](https://universe.roboflow.com/detector-ui8gl/eye-closed-detection-fufld-8v7qi)
+
+- **Dataset Overview:**
+  - **Total Images:** 1,400 images
+    - **Labelled Images:** 562 images of closed eyes
+  - **Data Splits:**
+    - **Training Set:** 70% of the dataset
+    - **Validation Set:** 15% of the dataset
+    - **Test Set:** 15% of the dataset
+
+- **Data Augmentation Techniques Applied:**
+  - **Rotation**
+  - **Brightness Adjustment**
+  - **Contrast Adjustment**
+  - **Additional augmentations** to enhance dataset variability and robustness for model training.
+
+---
+
+### Conclusion
+
+- **Summary of Findings:**
+  - The driver drowsiness detection system leverages advanced machine learning techniques to enhance road safety by monitoring driver alertness.
+  - Using a custom dataset and state-of-the-art object detection algorithms, the system effectively identifies closed eyes, indicating potential drowsiness.
+
+- **Future Development:**
+  - **Dataset Expansion:**
+    - Continuous collection and labeling of diverse data samples to improve model accuracy and generalization across various lighting conditions and demographics.
+  - **Edge Device Deployment:**
+    - Implementing the detection system on an edge device, such as the Jetson Nano, for real-time processing and reduced latency.
+    - Exploring optimization techniques for model size and performance to enable efficient operation on resource-constrained hardware.
+  
+- **Potential Impact:**
+  - Enhancing the accuracy of drowsiness detection systems can significantly reduce accident rates and improve driver safety, leading to safer roads for everyone.
+
+---
+
+### Slide: References
+
+1. [Ultralytics YOLOv11 Documentation](https://docs.ultralytics.com/models/yolo11/)
+2. [How to Train YOLOv11 on Custom Data](https://blog.roboflow.com/yolov11-how-to-train-custom-data/)
+3. [Arduino Software](https://www.arduino.cc/en/software/)
+4. [OpenCV Official Site](https://opencv.org/)
+5. [PyTorch Official Site](https://pytorch.org/)
+6. [Conda Installation Guide](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html)
+7. [Deep Learning Book](https://www.deeplearningbook.org/)
+8. [Roboflow Notebooks on GitHub](https://github.com/roboflow/notebooks?ref=blog.roboflow.com)
+9. [Google Colab](https://colab.research.google.com/)
