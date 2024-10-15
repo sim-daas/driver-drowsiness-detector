@@ -39,7 +39,7 @@ def check_sleep_state(results):
                     else:
                         # Calculate how long sleep has been detected
                         sleep_duration = time.time() - sleep_start_time
-                        if sleep_duration >= sleep_duration_threshold and not sleep_alert_printed:
+                        if sleep_duration >= sleep_duration_threshold:
                             print(sleep_start_time, time.time(), sleep_duration)
                             print("Sleep detected for more than 2 seconds!")
                             arduino.write(b'1')
