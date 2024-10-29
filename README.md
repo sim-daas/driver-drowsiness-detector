@@ -54,8 +54,6 @@ pip list
 ```bash
 python3 sleep.py
 ```
-```
-```
 ---
 
 ### Index
