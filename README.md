@@ -49,6 +49,13 @@ You can verify the installed packages using:
 pip list
 ```
 
+### 6. Run the detector
+
+```bash
+python3 sleep.py
+```
+```
+```
 ---
 
 ### Index
