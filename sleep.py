@@ -4,8 +4,8 @@ from ultralytics import YOLO
 import serial
 
 # Load the YOLOv11 model (Replace 'model.pt' with your model's file)
-model = YOLO("better.pt")
-arduino = serial.Serial('/dev/ttyACM0', 9600)  # Change to the correct port
+model = YOLO("models/better.pt")
+arduino = serial.Serial('/dev/ttyUSB0', 9600)  # Change to the correct port
 
 # Initialize the webcam
 cap = cv2.VideoCapture(0)  # Use 0 for the default camera
@@ -32,7 +32,7 @@ def check_sleep_state(results):
                 cls = int(boxes.cls[i])  # Get class label
                 conf = float(boxes.conf[i].item())
                 # Assuming class 0 is "closed eyes/sleep" (adjust based on your model's labels)
-                if cls == 0 and conf >= 0.6:
+                if cls == 0 and conf >= 0.53:
                     if not sleep_detected:
                         sleep_detected = True
                         sleep_start_time = time.time()  # Record the time when sleep is first detected
@@ -64,7 +64,7 @@ while True:
         break
 
     # Run YOLOv11 inference on the frame
-    results = model.predict(source=frame, verbose=False)
+    results = model.predict(source=frame)
 
     # Check if "sleep" state is detected and track its duration
     check_sleep_state(results)
