@@ -84,20 +84,6 @@ while True:
             left_eye_state = classify_eye(left_eye_img)
             right_eye_state = classify_eye(right_eye_img)
 
-            # Draw rectangles around the eyes and show open/closed state
-            eye_color = (0, 0, 255) if left_eye_state == 0 else (0, 255, 0)  # Red for closed, green for open
-            cv2.rectangle(frame, (left_eye_box[0], left_eye_box[1]), (left_eye_box[2], left_eye_box[3]), eye_color, 2)
-            cv2.putText(frame, "Closed" if left_eye_state == 0 else "Open", 
-                        (left_eye_box[0], left_eye_box[1] - 10), 
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, eye_color, 2)
-
-            eye_color = (0, 0, 255) if right_eye_state == 0 else (0, 255, 0)
-            cv2.rectangle(frame, (right_eye_box[0], right_eye_box[1]), (right_eye_box[2], right_eye_box[3]), eye_color, 2)
-            cv2.putText(frame, "Closed" if right_eye_state == 0 else "Open", 
-                        (right_eye_box[0], right_eye_box[1] - 10), 
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, eye_color, 2)
-
-    # Display the video with detected faces and eye state
     cv2.imshow('Drowsiness Detection', frame)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):  # Press 'q' to exit
