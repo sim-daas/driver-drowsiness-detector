@@ -1,5 +1,4 @@
 # DRIVER DROWSINESS DETECTION
-
 ## ENVIRONMENT SETUP
 
 Here's how you can create a basic Conda environment and install libraries using `pip` inside that environment:
